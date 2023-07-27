@@ -1,0 +1,175 @@
+body {
+  margin: 0;
+padding: 0;
+text-align: center;
+
+}
+
+h1 {
+  padding-top: 4em;
+}
+
+p{
+  margin: 2em 0;
+}
+
+img {
+  width: 40em;
+  max-width: 90%;
+}
+
+/* Add styles for the header section */
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+header h1 {
+  font-size: 28px;
+}
+
+nav ul {
+  list-style: none;
+}
+
+nav li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #ff7f50;
+}
+
+/* Add styles for the introduction section */
+#introduction {
+  background-color: #f9f9f9;
+  padding: 40px;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #ff7f50;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+/* Add styles for the about section */
+#about {
+  background-color: #fff;
+  padding: 40px;
+}
+
+.skills {
+  margin-top: 20px;
+}
+
+.skill {
+  margin-bottom: 10px;
+}
+
+.skill-name {
+  display: inline-block;
+  width: 120px;
+}
+
+.skill-bar {
+  display: inline-block;
+  height: 10px;
+  background-color: #ff7f50;
+  border-radius: 5px;
+}
+
+/* Add styles for the portfolio section */
+#portfolio {
+  background-color: #f9f9f9;
+  padding: 40px;
+}
+
+.project {
+  margin-bottom: 30px;
+}
+
+.project img {
+  max-width: 100%;
+}
+
+/* Add styles for the testimonials section */
+#testimonials {
+  background-color: #fff;
+  padding: 40px;
+}
+
+.testimonial {
+  margin-bottom: 30px;
+}
+
+/* Add styles for the contact section */
+#contact {
+  background-color: #f9f9f9;
+  padding: 40px;
+}
+
+form {
+  margin-top: 20px;
+}
+
+button {
+  background-color: #ff7f50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.social-icons {
+  margin-top: 20px;
+}
+
+.social-icons a {
+  display: inline-block;
+  margin-right: 10px;
+  color: #333;
+}
+
+/* Add styles for the footer section */
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.footer-links {
+  list-style: none;
+}
+
+.footer-links li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.footer-links li:last-child {
+  margin-right: 0;
+}
+
+.footer-links a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #ff7f50;
+}
