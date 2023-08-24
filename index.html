@@ -1,16 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <rel="stylesheet" href="assets/css/style.css">  
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>Michael Mai's Portfolio</title>
 </head>
-<body>
-    <h1>Hello World</h1>
-    <p>My name is Michael</p>
-    <img src="assets/images/matt.png" alt="Profile pic">
+<body class="bg-gray-100 font-sans">
+
+  <!-- Header -->
+  <header class="bg-black text-white py-6">
+    <div class="container mx-auto">
+      <nav class="flex justify-between items-center">
+        <div class="text-xl font-bold">Michael Mai</div>
+        <ul class="flex space-x-6">
+          <li><a href="#" class="hover:text-gray-400">Home</a></li>
+          <li><a href="#" class="hover:text-gray-400">Projects</a></li>
+          <li><a href="#" class="hover:text-gray-400">About</a></li>
+          <li><a href="#" class="hover:text-gray-400">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-red-600 to-pink-600 text-white py-16">
+    <div class="container mx-auto text-center">
+      <h1 class="text-4xl font-bold mb-4">Welcome to My Portfolio</h1>
+  <img src="assets/images/tiger.jpg" alt="" class="h-48 w-48 mx-auto mb-8">
+      <p class="text-lg">Showcasing my projects and skills</p>
+      <button class="mt-8 bg-white text-gray-900 py-2 px-6 rounded-full font-semibold hover:bg-opacity-80 transition duration-300">View Projects</button>
+    </div>
+  </section>
+
+  <!-- Projects Showcase -->
+  <section class="py-16">
+    <div class="container mx-auto text-center">
+      <h2 class="text-3xl font-semibold mb-8">Featured Projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <!-- Project Cards will go here -->
+    
+      </div>
+    </div>
+  </section>
+
+  <!-- About Me -->
+  <section class="bg-gray-200 py-16">
+    <div class="container mx-auto text-center">
+      <h2 class="text-3xl font-semibold mb-8">About Me</h2>
+      <p class="text-lg mb-6">I'm a passionate creative with a love for creating art that influences people.</p>
+      <button class="bg-black text-white py-2 px-6 rounded-full font-semibold hover:bg-opacity-80 transition duration-300">Learn More</button>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="py-16">
+    <div class="container mx-auto text-center">
+      <h2 class="text-3xl font-semibold mb-8">Get in Touch</h2>
+      <p class="text-lg mb-6">Have a project in mind? Let's collaborate!</p>
+      <button class="bg-black text-white py-2 px-6 rounded-full font-semibold hover:bg-opacity-80 transition duration-300">Contact Me</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-6">
+    <div class="container mx-auto text-center">
+      &copy; 2023 Michael Mai. All rights reserved.
+    </div>
+  </footer>
+
 </body>
 </html>
