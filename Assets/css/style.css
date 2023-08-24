@@ -1,181 +1,79 @@
+/* Apply Tailwind CSS utility classes */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Customize Tailwind CSS styles */
 body {
-margin: 0;
-padding: 0;
-text-align: center;
-font-family: 'Roboto', sans-serif;
-
+  font-family: 'Arial', sans-serif;
 }
 
-body {
-  background-color: #E5E5EC;
-
+/* Header styles */
+.bg-black {
+  background-color: #111;
 }
 
-h1 {
-  padding-top: 4em; 
-}
-
-p{
-  margin: 2em 0;
-}
-
-img {
-  width: 40em;
-  max-width: 90%;
-}
-
-/* Add styles for the header section */
-header {
-  background-color: #333;
+.text-white {
   color: #fff;
-  padding: 20px;
 }
 
-header h1 {
-  font-size: 28px;
+.hover\:text-gray-400:hover {
+  color: #888;
 }
 
-nav ul {
-  list-style: none;
+/* Hero section styles */
+.from-red-600 {
+  background-color: #ff3f5e;
 }
 
-nav li {
-  display: inline-block;
-  margin: 0 10px;
+.to-pink-600 {
+  background-color: #ffbe0b;
 }
 
-nav a {
-  text-decoration: none;
-  color: #fff;
-  transition: color 0.3s ease;
+.text-4xl {
+  font-size: 2.25rem;
 }
 
-nav a:hover {
-  color: #ff7f50;
+.text-lg {
+  font-size: 1.125rem;
 }
 
-/* Add styles for the introduction section */
-#introduction {
-  background-color: #f9f9f9;
-  padding: 40px;
-}
-
-.cta-button {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #ff7f50;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-  margin-top: 20px;
-}
-
-/* Add styles for the about section */
-#about {
+.bg-white {
   background-color: #fff;
-  padding: 40px;
 }
 
-.skills {
-  margin-top: 20px;
+.text-gray-900 {
+  color: #111;
 }
 
-.skill {
-  margin-bottom: 10px;
+.hover\:bg-opacity-80:hover {
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
-.skill-name {
-  display: inline-block;
-  width: 120px;
+/* Project cards styles */
+.border {
+  border: 1px solid #ccc;
 }
 
-.skill-bar {
-  display: inline-block;
-  height: 10px;
-  background-color: #ff7f50;
-  border-radius: 5px;
+.scale:hover {
+  transform: scale(1.05);
 }
 
-/* Add styles for the portfolio section */
-#portfolio {
+/* About section styles */
+.bg-gray-200 {
   background-color: #f9f9f9;
-  padding: 40px;
 }
 
-.project {
-  margin-bottom: 30px;
-}
-
-.project img {
-  max-width: 100%;
-}
-
-/* Add styles for the testimonials section */
-#testimonials {
+/* Contact section styles */
+.contact {
   background-color: #fff;
-  padding: 40px;
 }
 
-.testimonial {
-  margin-bottom: 30px;
+/* Footer styles */
+.bg-gray-900 {
+  background-color: #111;
 }
 
-/* Add styles for the contact section */
-#contact {
-  background-color: #f9f9f9;
-  padding: 40px;
-}
-
-form {
-  margin-top: 20px;
-}
-
-button {
-  background-color: #ff7f50;
+.text-white {
   color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.social-icons {
-  margin-top: 20px;
-}
-
-.social-icons a {
-  display: inline-block;
-  margin-right: 10px;
-  color: #333;
-}
-
-/* Add styles for the footer section */
-footer {
-  background-color: #333;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
-}
-
-.footer-links {
-  list-style: none;
-}
-
-.footer-links li {
-  display: inline-block;
-  margin-right: 20px;
-}
-
-.footer-links li:last-child {
-  margin-right: 0;
-}
-
-.footer-links a {
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.footer-links a:hover {
-  color: #ff7f50;
 }
