@@ -17,6 +17,7 @@
         <ul class="flex flex-wrap gap-4 sm:gap-6">
           <li><a href="#" class="hover:text-gray-400">Home</a></li>
           <li><a href="#projects" class="hover:text-gray-400">Projects</a></li>
+          <li><a href="#voice-skill" class="hover:text-gray-400">Voice Skill</a></li>
           <li><a href="#about" class="hover:text-gray-400">About</a></li>
           <li><a href="#contact" class="hover:text-gray-400">Contact</a></li>
         </ul>
@@ -92,6 +93,59 @@
     </div>
   </section>
 
+
+  <!-- OpenBox OpenClaw Voice Skill -->
+  <section id="voice-skill" class="voice-skill-section" aria-labelledby="voice-skill-title">
+    <div class="voice-skill-copy">
+      <p class="eyebrow">OpenBox OpenClaw skill</p>
+      <h2 id="voice-skill-title">Artificial human voice for AI agents</h2>
+      <p>
+        Convert written prompts into vocalized American English speech with selectable
+        male or female presentation, adjustable volume, and tone shaping for clearer
+        agent delivery.
+      </p>
+      <ul class="voice-feature-list" aria-label="Voice skill capabilities">
+        <li>Text-to-speech output for agent messages</li>
+        <li>American English voices only</li>
+        <li>Male or female voice preference</li>
+        <li>Volume and tone controls</li>
+      </ul>
+    </div>
+
+    <div class="voice-console" aria-label="OpenBox OpenClaw voice control panel">
+      <div class="voice-console-header">
+        <span>OPENCLAW_VOICE.skill</span>
+        <span id="voice-status">ready</span>
+      </div>
+      <label for="voice-text">Agent text</label>
+      <textarea id="voice-text" rows="5">Hello. I am an OpenBox OpenClaw voice skill, ready to convert text into an artificial human voice.</textarea>
+
+      <div class="voice-controls">
+        <fieldset>
+          <legend>Voice</legend>
+          <label><input type="radio" name="voice-gender" value="female" checked> Female</label>
+          <label><input type="radio" name="voice-gender" value="male"> Male</label>
+        </fieldset>
+
+        <label>
+          Volume <span id="volume-value">80%</span>
+          <input id="voice-volume" type="range" min="0" max="1" step="0.05" value="0.8">
+        </label>
+
+        <label>
+          Tone <span id="tone-value">Warm</span>
+          <input id="voice-tone" type="range" min="0.7" max="1.4" step="0.05" value="1.05">
+        </label>
+      </div>
+
+      <div class="voice-actions">
+        <button id="speak-voice" type="button">Vocalize Text</button>
+        <button id="stop-voice" type="button">Stop</button>
+      </div>
+      <p class="voice-note">Uses your browser speech engine and selects an en-US voice when available.</p>
+    </div>
+  </section>
+
   <!-- Projects Showcase -->
   <section id="projects" class="py-16">
     <div class="container mx-auto text-center px-6">
@@ -100,6 +154,10 @@
         <article class="project-card">
           <h3>24/7 Agent Cell</h3>
           <p>A moody pixel-art visualizer for autonomous AI routines caught in an infinite loop.</p>
+        </article>
+        <article class="project-card">
+          <h3>OpenBox OpenClaw Voice Skill</h3>
+          <p>A browser-powered speech prototype for AI agents with American English voice, volume, and tone controls.</p>
         </article>
       </div>
     </div>
@@ -132,14 +190,98 @@
 
   <script>
     const clock = document.getElementById('agent-clock');
+    const voiceText = document.getElementById('voice-text');
+    const voiceVolume = document.getElementById('voice-volume');
+    const voiceTone = document.getElementById('voice-tone');
+    const volumeValue = document.getElementById('volume-value');
+    const toneValue = document.getElementById('tone-value');
+    const voiceStatus = document.getElementById('voice-status');
+    const speakVoice = document.getElementById('speak-voice');
+    const stopVoice = document.getElementById('stop-voice');
+    let availableVoices = [];
 
     function updateClock() {
       const now = new Date();
       clock.textContent = now.toISOString().slice(11, 19);
     }
 
+    function loadVoices() {
+      if (!('speechSynthesis' in window)) {
+        voiceStatus.textContent = 'speech unavailable';
+        speakVoice.disabled = true;
+        return;
+      }
+
+      availableVoices = window.speechSynthesis
+        .getVoices()
+        .filter((voice) => voice.lang.toLowerCase() === 'en-us');
+      voiceStatus.textContent = availableVoices.length ? 'en-US ready' : 'default voice';
+    }
+
+    function selectedGender() {
+      return document.querySelector('input[name="voice-gender"]:checked').value;
+    }
+
+    function selectAmericanVoice(gender) {
+      const preferredNames = gender === 'male'
+        ? ['guy', 'david', 'mark', 'alex', 'daniel']
+        : ['jenny', 'zira', 'samantha', 'victoria', 'karen'];
+
+      return availableVoices.find((voice) => (
+        preferredNames.some((name) => voice.name.toLowerCase().includes(name))
+      )) || availableVoices[0] || null;
+    }
+
+    function describeTone(value) {
+      if (value < 0.9) return 'Deep';
+      if (value > 1.2) return 'Bright';
+      return 'Warm';
+    }
+
+    function updateVoiceReadouts() {
+      volumeValue.textContent = `${Math.round(Number(voiceVolume.value) * 100)}%`;
+      toneValue.textContent = describeTone(Number(voiceTone.value));
+    }
+
+    function vocalizeText() {
+      if (!('speechSynthesis' in window)) return;
+
+      const message = voiceText.value.trim();
+      if (!message) {
+        voiceStatus.textContent = 'add text first';
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(message);
+      utterance.lang = 'en-US';
+      utterance.volume = Number(voiceVolume.value);
+      utterance.pitch = Number(voiceTone.value);
+      utterance.rate = selectedGender() === 'male' ? 0.94 : 1;
+      utterance.voice = selectAmericanVoice(selectedGender());
+      utterance.onstart = () => { voiceStatus.textContent = 'speaking'; };
+      utterance.onend = () => { voiceStatus.textContent = 'ready'; };
+      window.speechSynthesis.speak(utterance);
+    }
+
     updateClock();
     setInterval(updateClock, 1000);
+    updateVoiceReadouts();
+    loadVoices();
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+
+    voiceVolume.addEventListener('input', updateVoiceReadouts);
+    voiceTone.addEventListener('input', updateVoiceReadouts);
+    speakVoice.addEventListener('click', vocalizeText);
+    stopVoice.addEventListener('click', () => {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        voiceStatus.textContent = 'stopped';
+      }
+    });
   </script>
 </body>
 </html>
