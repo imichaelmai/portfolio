@@ -4,20 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="Assets/css/style.css" rel="stylesheet">
   <title>Michael Mai's Portfolio</title>
 </head>
 <body class="bg-gray-100 font-sans">
 
   <!-- Header -->
   <header class="bg-black text-white py-6">
-    <div class="container mx-auto">
-      <nav class="flex justify-between items-center">
+    <div class="container mx-auto px-6">
+      <nav class="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center">
         <div class="text-xl font-bold">Michael Mai</div>
-        <ul class="flex space-x-6">
+        <ul class="flex flex-wrap gap-4 sm:gap-6">
           <li><a href="#" class="hover:text-gray-400">Home</a></li>
-          <li><a href="#" class="hover:text-gray-400">Projects</a></li>
-          <li><a href="#" class="hover:text-gray-400">About</a></li>
-          <li><a href="#" class="hover:text-gray-400">Contact</a></li>
+          <li><a href="#projects" class="hover:text-gray-400">Projects</a></li>
+          <li><a href="#about" class="hover:text-gray-400">About</a></li>
+          <li><a href="#contact" class="hover:text-gray-400">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -25,28 +26,88 @@
 
   <!-- Hero Section -->
   <section class="bg-gradient-to-r from-red-600 to-pink-600 text-white py-16">
-    <div class="container mx-auto text-center">
+    <div class="container mx-auto text-center px-6">
       <h1 class="text-4xl font-bold mb-4">Welcome to My Portfolio</h1>
-  <img src="Assets/images/tiger.jpg" alt="" class="h-48 w-48 mx-auto mb-8">
+      <img src="Assets/images/tiger.jpg" alt="Tiger portrait" class="h-48 w-48 mx-auto mb-8 object-cover rounded-full pixel-frame">
       <p class="text-lg">Showcasing my projects and skills</p>
-      <button class="mt-8 bg-white text-gray-900 py-2 px-6 rounded-full font-semibold hover:bg-opacity-80 transition duration-300">View Projects</button>
+      <a href="#projects" class="inline-block mt-8 bg-white text-gray-900 py-2 px-6 rounded-full font-semibold hover:bg-opacity-80 transition duration-300">View Projects</a>
+    </div>
+  </section>
+
+  <!-- Pixel AI Visualizer -->
+  <section class="ai-visualizer-section" aria-labelledby="ai-visualizer-title">
+    <div class="visualizer-copy">
+      <p class="eyebrow">Live concept visualizer</p>
+      <h2 id="ai-visualizer-title">AI agents in a 24/7 solitary cell</h2>
+      <p>
+        A pixel-art scene that imagines always-on autonomous agents as tiny routines pacing,
+        watching, logging, and looping inside a sealed digital room.
+      </p>
+      <div class="status-strip" aria-label="Visualizer telemetry">
+        <span><strong id="agent-clock">00:00:00</strong> UTC watch</span>
+        <span><strong>03</strong> agents awake</span>
+        <span><strong>∞</strong> loop cycle</span>
+      </div>
+    </div>
+
+    <div class="pixel-monitor" role="img" aria-label="Pixel-art solitary confinement cell with animated AI agents, monitors, bars, and a day-night cycle">
+      <div class="monitor-top">
+        <span>AGENT-CELL // BLOCK 24-7</span>
+        <span class="recording-dot">REC</span>
+      </div>
+      <div class="pixel-cell">
+        <div class="scanlines"></div>
+        <div class="cell-window" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="wall-tally" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i>
+          <i></i><i></i><i></i><i></i><i></i>
+          <i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <div class="terminal terminal-left" aria-hidden="true">
+          <b></b><b></b><b></b><b></b>
+        </div>
+        <div class="terminal terminal-right" aria-hidden="true">
+          <b></b><b></b><b></b>
+        </div>
+        <div class="agent agent-one" aria-hidden="true">
+          <span class="eye"></span><span class="eye"></span>
+        </div>
+        <div class="agent agent-two" aria-hidden="true">
+          <span class="eye"></span><span class="eye"></span>
+        </div>
+        <div class="agent agent-three" aria-hidden="true">
+          <span class="eye"></span><span class="eye"></span>
+        </div>
+        <div class="floor-grid" aria-hidden="true"></div>
+        <div class="cell-bars" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="monitor-bottom">
+        <span>solitary_mode=true</span>
+        <span>heartbeat: nominal</span>
+      </div>
     </div>
   </section>
 
   <!-- Projects Showcase -->
-  <section class="py-16">
-    <div class="container mx-auto text-center">
+  <section id="projects" class="py-16">
+    <div class="container mx-auto text-center px-6">
       <h2 class="text-3xl font-semibold mb-8">Featured Projects</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        <!-- Project Cards will go here -->
-    
+        <article class="project-card">
+          <h3>24/7 Agent Cell</h3>
+          <p>A moody pixel-art visualizer for autonomous AI routines caught in an infinite loop.</p>
+        </article>
       </div>
     </div>
   </section>
 
   <!-- About Me -->
-  <section class="bg-gray-200 py-16">
-    <div class="container mx-auto text-center">
+  <section id="about" class="bg-gray-200 py-16">
+    <div class="container mx-auto text-center px-6">
       <h2 class="text-3xl font-semibold mb-8">About Me</h2>
       <p class="text-lg mb-6">I'm a passionate creative with a love for creating art that influences people.</p>
       <button class="bg-black text-white py-2 px-6 rounded-full font-semibold hover:bg-opacity-80 transition duration-300">Learn More</button>
@@ -54,8 +115,8 @@
   </section>
 
   <!-- Contact -->
-  <section class="py-16">
-    <div class="container mx-auto text-center">
+  <section id="contact" class="py-16">
+    <div class="container mx-auto text-center px-6">
       <h2 class="text-3xl font-semibold mb-8">Get in Touch</h2>
       <p class="text-lg mb-6">Have a project in mind? Let's collaborate!</p>
       <button class="bg-black text-white py-2 px-6 rounded-full font-semibold hover:bg-opacity-80 transition duration-300">Contact Me</button>
@@ -64,10 +125,21 @@
 
   <!-- Footer -->
   <footer class="bg-gray-900 text-white py-6">
-    <div class="container mx-auto text-center">
-      &copy; 2023 Michael Mai. All rights reserved.
+    <div class="container mx-auto text-center px-6">
+      &copy; 2026 Michael Mai. All rights reserved.
     </div>
   </footer>
 
+  <script>
+    const clock = document.getElementById('agent-clock');
+
+    function updateClock() {
+      const now = new Date();
+      clock.textContent = now.toISOString().slice(11, 19);
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
 </body>
 </html>
