@@ -98,6 +98,22 @@
   <section id="voice-skill" class="voice-skill-section" aria-labelledby="voice-skill-title">
     <div class="voice-skill-copy">
       <p class="eyebrow">OpenBox OpenClaw skill</p>
+      <h2 id="voice-skill-title">Artificial human voice studio</h2>
+      <p>
+        A polished vocal generation console for AI agents: type a message, choose a
+        male or female American English voice profile, then play the generated speech
+        through the device speakers with live volume and tone controls.
+      </p>
+      <div class="codec-stack" aria-label="Audio output path">
+        <span>Text input</span>
+        <span>en-US voice engine</span>
+        <span>Speaker output</span>
+      </div>
+      <ul class="voice-feature-list" aria-label="Voice skill capabilities">
+        <li>Text-to-speech output for agent messages</li>
+        <li>American English voice selection only</li>
+        <li>Male or female voice profile preference</li>
+        <li>Play, pause, stop, volume, and tone controls</li>
       <h2 id="voice-skill-title">Artificial human voice for AI agents</h2>
       <p>
         Convert written prompts into vocalized American English speech with selectable
@@ -117,6 +133,29 @@
         <span>OPENCLAW_VOICE.skill</span>
         <span id="voice-status">ready</span>
       </div>
+
+      <div id="voice-stage" class="voice-stage" aria-hidden="true">
+        <div class="voice-orb">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="voice-waveform">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <div class="voice-codecs">
+          <span>Web Speech API</span>
+          <span>PCM audio stream</span>
+          <span>System codec</span>
+        </div>
+      </div>
+
+      <label for="voice-text">Agent text</label>
+      <textarea id="voice-text" rows="5">Hello. I am an OpenBox OpenClaw voice skill, ready to convert text into an artificial human voice through your speakers.</textarea>
+
+      <div class="voice-controls">
+        <fieldset>
+          <legend>Voice profile</legend>
       <label for="voice-text">Agent text</label>
       <textarea id="voice-text" rows="5">Hello. I am an OpenBox OpenClaw voice skill, ready to convert text into an artificial human voice.</textarea>
 
@@ -139,6 +178,11 @@
       </div>
 
       <div class="voice-actions">
+        <button id="play-voice" class="primary-action" type="button" aria-label="Play vocal generation">▶ Play</button>
+        <button id="pause-voice" type="button" aria-label="Pause vocal generation">⏸ Pause</button>
+        <button id="stop-voice" type="button" aria-label="Stop vocal generation">■ Stop</button>
+      </div>
+      <p class="voice-note">Audio is generated with the browser voice engine, constrained to en-US voices when available, and routed to the device speaker output.</p>
         <button id="speak-voice" type="button">Vocalize Text</button>
         <button id="stop-voice" type="button">Stop</button>
       </div>
@@ -157,6 +201,7 @@
         </article>
         <article class="project-card">
           <h3>OpenBox OpenClaw Voice Skill</h3>
+          <p>A polished browser-powered speech studio for AI agents with American English voice profiles, speaker playback, pause, volume, and tone controls.</p>
           <p>A browser-powered speech prototype for AI agents with American English voice, volume, and tone controls.</p>
         </article>
       </div>
@@ -196,6 +241,13 @@
     const volumeValue = document.getElementById('volume-value');
     const toneValue = document.getElementById('tone-value');
     const voiceStatus = document.getElementById('voice-status');
+    const playVoice = document.getElementById('play-voice');
+    const pauseVoice = document.getElementById('pause-voice');
+    const voiceStage = document.getElementById('voice-stage');
+    const stopVoice = document.getElementById('stop-voice');
+    let availableVoices = [];
+    let currentUtterance = null;
+    let speechWasCancelled = false;
     const speakVoice = document.getElementById('speak-voice');
     const stopVoice = document.getElementById('stop-voice');
     let availableVoices = [];
@@ -208,6 +260,9 @@
     function loadVoices() {
       if (!('speechSynthesis' in window)) {
         voiceStatus.textContent = 'speech unavailable';
+        playVoice.disabled = true;
+        pauseVoice.disabled = true;
+        stopVoice.disabled = true;
         speakVoice.disabled = true;
         return;
       }
@@ -243,6 +298,42 @@
       toneValue.textContent = describeTone(Number(voiceTone.value));
     }
 
+    function setVoiceEngineState(state) {
+      voiceStage.dataset.state = state;
+      voiceStatus.textContent = state;
+      pauseVoice.disabled = state !== 'speaking';
+    }
+
+    function buildUtterance(message) {
+      const utterance = new SpeechSynthesisUtterance(message);
+      utterance.lang = 'en-US';
+      utterance.volume = Number(voiceVolume.value);
+      utterance.pitch = Number(voiceTone.value);
+      utterance.rate = selectedGender() === 'male' ? 0.94 : 1;
+      utterance.voice = selectAmericanVoice(selectedGender());
+      utterance.onstart = () => { setVoiceEngineState('speaking'); };
+      utterance.onpause = () => { setVoiceEngineState('paused'); };
+      utterance.onresume = () => { setVoiceEngineState('speaking'); };
+      utterance.onend = () => {
+        currentUtterance = null;
+        setVoiceEngineState(speechWasCancelled ? 'stopped' : 'ready');
+      };
+      utterance.onerror = () => {
+        currentUtterance = null;
+        setVoiceEngineState('audio blocked');
+      };
+      return utterance;
+    }
+
+    function playVoiceEngine() {
+      if (!('speechSynthesis' in window)) return;
+
+      if (window.speechSynthesis.paused && currentUtterance) {
+        window.speechSynthesis.resume();
+        setVoiceEngineState('speaking');
+        return;
+      }
+
     function vocalizeText() {
       if (!('speechSynthesis' in window)) return;
 
@@ -252,6 +343,26 @@
         return;
       }
 
+      speechWasCancelled = false;
+      window.speechSynthesis.cancel();
+      currentUtterance = buildUtterance(message);
+      window.speechSynthesis.speak(currentUtterance);
+    }
+
+    function pauseVoiceEngine() {
+      if ('speechSynthesis' in window && window.speechSynthesis.speaking) {
+        window.speechSynthesis.pause();
+        setVoiceEngineState('paused');
+      }
+    }
+
+    function stopVoiceEngine() {
+      if ('speechSynthesis' in window) {
+        speechWasCancelled = true;
+        window.speechSynthesis.cancel();
+        currentUtterance = null;
+        setVoiceEngineState('stopped');
+      }
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(message);
       utterance.lang = 'en-US';
@@ -267,6 +378,7 @@
     updateClock();
     setInterval(updateClock, 1000);
     updateVoiceReadouts();
+    setVoiceEngineState('ready');
     loadVoices();
 
     if ('speechSynthesis' in window) {
@@ -275,6 +387,9 @@
 
     voiceVolume.addEventListener('input', updateVoiceReadouts);
     voiceTone.addEventListener('input', updateVoiceReadouts);
+    playVoice.addEventListener('click', playVoiceEngine);
+    pauseVoice.addEventListener('click', pauseVoiceEngine);
+    stopVoice.addEventListener('click', stopVoiceEngine);
     speakVoice.addEventListener('click', vocalizeText);
     stopVoice.addEventListener('click', () => {
       if ('speechSynthesis' in window) {
