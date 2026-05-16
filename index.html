@@ -114,6 +114,17 @@
         <li>American English voice selection only</li>
         <li>Male or female voice profile preference</li>
         <li>Play, pause, stop, volume, and tone controls</li>
+      <h2 id="voice-skill-title">Artificial human voice for AI agents</h2>
+      <p>
+        Convert written prompts into vocalized American English speech with selectable
+        male or female presentation, adjustable volume, and tone shaping for clearer
+        agent delivery.
+      </p>
+      <ul class="voice-feature-list" aria-label="Voice skill capabilities">
+        <li>Text-to-speech output for agent messages</li>
+        <li>American English voices only</li>
+        <li>Male or female voice preference</li>
+        <li>Volume and tone controls</li>
       </ul>
     </div>
 
@@ -145,6 +156,12 @@
       <div class="voice-controls">
         <fieldset>
           <legend>Voice profile</legend>
+      <label for="voice-text">Agent text</label>
+      <textarea id="voice-text" rows="5">Hello. I am an OpenBox OpenClaw voice skill, ready to convert text into an artificial human voice.</textarea>
+
+      <div class="voice-controls">
+        <fieldset>
+          <legend>Voice</legend>
           <label><input type="radio" name="voice-gender" value="female" checked> Female</label>
           <label><input type="radio" name="voice-gender" value="male"> Male</label>
         </fieldset>
@@ -166,6 +183,10 @@
         <button id="stop-voice" type="button" aria-label="Stop vocal generation">■ Stop</button>
       </div>
       <p class="voice-note">Audio is generated with the browser voice engine, constrained to en-US voices when available, and routed to the device speaker output.</p>
+        <button id="speak-voice" type="button">Vocalize Text</button>
+        <button id="stop-voice" type="button">Stop</button>
+      </div>
+      <p class="voice-note">Uses your browser speech engine and selects an en-US voice when available.</p>
     </div>
   </section>
 
@@ -181,6 +202,7 @@
         <article class="project-card">
           <h3>OpenBox OpenClaw Voice Skill</h3>
           <p>A polished browser-powered speech studio for AI agents with American English voice profiles, speaker playback, pause, volume, and tone controls.</p>
+          <p>A browser-powered speech prototype for AI agents with American English voice, volume, and tone controls.</p>
         </article>
       </div>
     </div>
@@ -226,6 +248,9 @@
     let availableVoices = [];
     let currentUtterance = null;
     let speechWasCancelled = false;
+    const speakVoice = document.getElementById('speak-voice');
+    const stopVoice = document.getElementById('stop-voice');
+    let availableVoices = [];
 
     function updateClock() {
       const now = new Date();
@@ -238,6 +263,7 @@
         playVoice.disabled = true;
         pauseVoice.disabled = true;
         stopVoice.disabled = true;
+        speakVoice.disabled = true;
         return;
       }
 
@@ -308,6 +334,9 @@
         return;
       }
 
+    function vocalizeText() {
+      if (!('speechSynthesis' in window)) return;
+
       const message = voiceText.value.trim();
       if (!message) {
         voiceStatus.textContent = 'add text first';
@@ -334,6 +363,16 @@
         currentUtterance = null;
         setVoiceEngineState('stopped');
       }
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(message);
+      utterance.lang = 'en-US';
+      utterance.volume = Number(voiceVolume.value);
+      utterance.pitch = Number(voiceTone.value);
+      utterance.rate = selectedGender() === 'male' ? 0.94 : 1;
+      utterance.voice = selectAmericanVoice(selectedGender());
+      utterance.onstart = () => { voiceStatus.textContent = 'speaking'; };
+      utterance.onend = () => { voiceStatus.textContent = 'ready'; };
+      window.speechSynthesis.speak(utterance);
     }
 
     updateClock();
@@ -351,6 +390,13 @@
     playVoice.addEventListener('click', playVoiceEngine);
     pauseVoice.addEventListener('click', pauseVoiceEngine);
     stopVoice.addEventListener('click', stopVoiceEngine);
+    speakVoice.addEventListener('click', vocalizeText);
+    stopVoice.addEventListener('click', () => {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        voiceStatus.textContent = 'stopped';
+      }
+    });
   </script>
 </body>
 </html>
