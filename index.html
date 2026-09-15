@@ -1,287 +1,590 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link href="Assets/css/style.css" rel="stylesheet">
-  <title>Michael Mai's Portfolio</title>
-</head>
-<body class="bg-gray-100 font-sans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Michael Mai portfolio for AI creative operations, product prototypes, studio support, and workflow design."
+    />
+    <title>Michael Mai | AI Creative Operations Portfolio</title>
+    <style>
+      :root {
+        --ink: #17202a;
+        --muted: #536170;
+        --paper: #f7f4ed;
+        --panel: #fffdf8;
+        --line: rgb(23 32 42 / 14%);
+        --red: #8b2532;
+        --teal: #23756a;
+        --gold: #b8832f;
+        --blue: #2d5873;
+        color: var(--ink);
+        background: var(--paper);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.55;
+      }
 
-  <!-- Header -->
-  <header class="bg-black text-white py-6">
-    <div class="container mx-auto px-6">
-      <nav class="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center">
-        <div class="text-xl font-bold">Michael Mai</div>
-        <ul class="flex flex-wrap gap-4 sm:gap-6">
-          <li><a href="#" class="hover:text-gray-400">Home</a></li>
-          <li><a href="#projects" class="hover:text-gray-400">Projects</a></li>
-          <li><a href="#voice-skill" class="hover:text-gray-400">Voice Skill</a></li>
-          <li><a href="#about" class="hover:text-gray-400">About</a></li>
-          <li><a href="#contact" class="hover:text-gray-400">Contact</a></li>
-        </ul>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at 20% 0%, rgb(184 131 47 / 13%), transparent 26rem),
+          linear-gradient(180deg, #f7f4ed 0%, #eef3f2 58%, #f8f7f2 100%);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .shell {
+        width: min(1160px, calc(100vw - 32px));
+        margin: 0 auto;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        border-bottom: 1px solid var(--line);
+        background: rgb(247 244 237 / 88%);
+        backdrop-filter: blur(14px);
+      }
+
+      nav {
+        min-height: 66px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+      }
+
+      .brand {
+        font-weight: 900;
+      }
+
+      .nav-links,
+      .actions,
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .nav-links {
+        justify-content: flex-end;
+      }
+
+      .nav-links a,
+      .button {
+        min-height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 9px 13px;
+        background: rgb(255 253 248 / 74%);
+        text-decoration: none;
+        font-size: 0.92rem;
+        font-weight: 750;
+      }
+
+      .button.primary {
+        border-color: var(--ink);
+        background: var(--ink);
+        color: #fffdf8;
+      }
+
+      main {
+        padding-bottom: 54px;
+      }
+
+      .hero {
+        min-height: calc(100vh - 66px);
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(300px, 0.86fr);
+        gap: 34px;
+        align-items: center;
+        padding: 56px 0 40px;
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--red);
+        font-size: 0.82rem;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 780px;
+        margin-bottom: 20px;
+        font-size: clamp(2.7rem, 6.2vw, 6rem);
+        line-height: 0.94;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        margin-bottom: 0;
+        font-size: clamp(1.8rem, 3vw, 3rem);
+        line-height: 1;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin-bottom: 8px;
+        font-size: 1.08rem;
+        letter-spacing: 0;
+      }
+
+      .hero-copy {
+        max-width: 680px;
+        color: #35414c;
+        font-size: clamp(1.04rem, 1.5vw, 1.22rem);
+      }
+
+      .actions {
+        margin-top: 26px;
+      }
+
+      .signal-board {
+        display: grid;
+        gap: 12px;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgb(255 253 248 / 82%);
+        box-shadow: 0 22px 54px rgb(23 32 42 / 10%);
+      }
+
+      .scorecard {
+        padding: 18px;
+      }
+
+      .scorecard h2 {
+        font-size: 1.3rem;
+        line-height: 1.1;
+        margin-bottom: 14px;
+      }
+
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      .metric {
+        border-top: 3px solid var(--teal);
+        padding-top: 10px;
+      }
+
+      .metric strong {
+        display: block;
+        font-size: 1.3rem;
+      }
+
+      .metric span {
+        color: var(--muted);
+        font-size: 0.84rem;
+      }
+
+      .workflow-card {
+        overflow: hidden;
+      }
+
+      .workflow-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 13px 15px;
+        background: #17202a;
+        color: #fffdf8;
+        font-size: 0.8rem;
+        font-weight: 800;
+      }
+
+      .workflow-body {
+        display: grid;
+        gap: 11px;
+        padding: 16px;
+      }
+
+      .step {
+        display: grid;
+        grid-template-columns: 28px 1fr;
+        gap: 10px;
+        align-items: start;
+      }
+
+      .step span {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        background: rgb(35 117 106 / 12%);
+        color: var(--teal);
+        font-weight: 900;
+      }
+
+      .step p {
+        margin: 2px 0 0;
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
+
+      section {
+        padding: 48px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .section-head {
+        display: grid;
+        grid-template-columns: minmax(0, 0.8fr) minmax(280px, 1.2fr);
+        gap: 28px;
+        align-items: start;
+        margin-bottom: 24px;
+      }
+
+      .section-head p {
+        color: var(--muted);
+        margin-bottom: 0;
+      }
+
+      .project-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .project {
+        overflow: hidden;
+      }
+
+      .project-visual {
+        min-height: 142px;
+        display: grid;
+        align-content: end;
+        gap: 8px;
+        padding: 16px;
+        color: #fffdf8;
+      }
+
+      .music {
+        background:
+          linear-gradient(135deg, rgb(23 32 42 / 22%), rgb(23 32 42 / 82%)),
+          repeating-linear-gradient(90deg, #23756a 0 18px, #2d5873 18px 36px, #b8832f 36px 54px);
+      }
+
+      .voice {
+        background:
+          linear-gradient(135deg, rgb(23 32 42 / 18%), rgb(23 32 42 / 82%)),
+          repeating-radial-gradient(circle at 25% 70%, #8b2532 0 5px, #2d5873 5px 12px, #17202a 12px 20px);
+      }
+
+      .language {
+        background:
+          linear-gradient(135deg, rgb(23 32 42 / 18%), rgb(23 32 42 / 82%)),
+          repeating-linear-gradient(45deg, #b8832f 0 14px, #f7f4ed 14px 18px, #23756a 18px 32px);
+      }
+
+      .project-visual strong {
+        font-size: 1.35rem;
+      }
+
+      .project-visual span {
+        font-size: 0.86rem;
+        font-weight: 800;
+        opacity: 0.9;
+      }
+
+      .project-body {
+        padding: 16px;
+      }
+
+      .project-body p,
+      .fit p,
+      .experience p {
+        color: var(--muted);
+        margin-bottom: 0;
+      }
+
+      .tag {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 4px 8px;
+        background: #f7f4ed;
+        color: #43515f;
+        font-size: 0.78rem;
+        font-weight: 800;
+      }
+
+      .fit-grid,
+      .experience-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .fit,
+      .experience {
+        padding: 16px;
+      }
+
+      .contact-band {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 20px;
+        align-items: center;
+        padding: 22px;
+      }
+
+      .contact-band p {
+        color: var(--muted);
+        margin-bottom: 0;
+      }
+
+      footer {
+        padding: 28px 0 42px;
+        color: var(--muted);
+      }
+
+      @media (max-width: 900px) {
+        nav,
+        .hero,
+        .section-head,
+        .contact-band {
+          display: grid;
+          grid-template-columns: 1fr;
+        }
+
+        nav {
+          align-items: start;
+          padding: 14px 0;
+        }
+
+        .nav-links {
+          justify-content: flex-start;
+        }
+
+        .hero {
+          min-height: auto;
+          padding-top: 34px;
+        }
+
+        .project-grid,
+        .fit-grid,
+        .experience-grid,
+        .metric-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="shell" aria-label="Portfolio navigation">
+        <div class="brand">Michael Mai</div>
+        <div class="nav-links">
+          <a href="#work">Work</a>
+          <a href="#fit">Fit</a>
+          <a href="#experience">Experience</a>
+          <a href="mailto:imichaelmai@gmail.com">Email</a>
+          <a href="https://www.linkedin.com/in/imichaelmai">LinkedIn</a>
+        </div>
       </nav>
-    </div>
-  </header>
+    </header>
 
-  <!-- Hero Section -->
-  <section class="bg-gradient-to-r from-red-600 to-pink-600 text-white py-16">
-    <div class="container mx-auto text-center px-6">
-      <h1 class="text-4xl font-bold mb-4">Welcome to My Portfolio</h1>
-      <img src="Assets/images/tiger.jpg" alt="Tiger portrait" class="h-48 w-48 mx-auto mb-8 object-cover rounded-full pixel-frame">
-      <p class="text-lg">Showcasing my projects and skills</p>
-      <a href="#projects" class="inline-block mt-8 bg-white text-gray-900 py-2 px-6 rounded-full font-semibold hover:bg-opacity-80 transition duration-300">View Projects</a>
-    </div>
-  </section>
-
-  <!-- Pixel AI Visualizer -->
-  <section class="ai-visualizer-section" aria-labelledby="ai-visualizer-title">
-    <div class="visualizer-copy">
-      <p class="eyebrow">Live concept visualizer</p>
-      <h2 id="ai-visualizer-title">AI agents in a 24/7 solitary cell</h2>
-      <p>
-        A pixel-art scene that imagines always-on autonomous agents as tiny routines pacing,
-        watching, logging, and looping inside a sealed digital room.
-      </p>
-      <div class="status-strip" aria-label="Visualizer telemetry">
-        <span><strong id="agent-clock">00:00:00</strong> UTC watch</span>
-        <span><strong>03</strong> agents awake</span>
-        <span><strong>∞</strong> loop cycle</span>
-      </div>
-    </div>
-
-    <div class="pixel-monitor" role="img" aria-label="Pixel-art solitary confinement cell with animated AI agents, monitors, bars, and a day-night cycle">
-      <div class="monitor-top">
-        <span>AGENT-CELL // BLOCK 24-7</span>
-        <span class="recording-dot">REC</span>
-      </div>
-      <div class="pixel-cell">
-        <div class="scanlines"></div>
-        <div class="cell-window" aria-hidden="true">
-          <span></span><span></span><span></span><span></span>
+    <main class="shell">
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <p class="eyebrow">AI creative operations · studio support · product prototypes</p>
+          <h1 id="hero-title">I help creative teams turn AI ideas into organized, testable workflows.</h1>
+          <p class="hero-copy">
+            Communications and operations professional with hands-on AI-assisted prototypes across music,
+            voice, video, language learning, and interactive training. I bring the structure around new ideas:
+            notes, research, follow-through, user flows, documentation, and practical demos.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="mailto:imichaelmai@gmail.com">Contact Michael</a>
+            <a class="button" href="https://www.linkedin.com/in/imichaelmai">LinkedIn</a>
+            <a class="button" href="https://github.com/imichaelmai">GitHub</a>
+          </div>
         </div>
-        <div class="wall-tally" aria-hidden="true">
-          <i></i><i></i><i></i><i></i><i></i>
-          <i></i><i></i><i></i><i></i><i></i>
-          <i></i><i></i><i></i><i></i><i></i>
+
+        <aside class="signal-board" aria-label="Portfolio summary">
+          <div class="panel scorecard">
+            <p class="eyebrow">Hiring Signal</p>
+            <h2>Best fit: AI studio operations, creative technology enablement, documentation, customer success, and executive support.</h2>
+            <div class="metric-grid">
+              <div class="metric"><strong>400</strong><span>selected from U.S. launch applicant pool</span></div>
+              <div class="metric"><strong>Top 3</strong><span>global sales location contribution</span></div>
+              <div class="metric"><strong>30-40</strong><span>students guided in community learning groups</span></div>
+            </div>
+          </div>
+
+          <div class="panel workflow-card">
+            <div class="workflow-top">
+              <span>AI WORKFLOW LOOP</span>
+              <span>human review on</span>
+            </div>
+            <div class="workflow-body">
+              <div class="step">
+                <span>1</span>
+                <div><strong>Frame the goal</strong><p>Turn a loose creative or business idea into a scoped workflow.</p></div>
+              </div>
+              <div class="step">
+                <span>2</span>
+                <div><strong>Prototype the path</strong><p>Build a usable demo, prompt flow, export, or operating checklist.</p></div>
+              </div>
+              <div class="step">
+                <span>3</span>
+                <div><strong>Package the handoff</strong><p>Document decisions, next steps, risks, and what a teammate should test next.</p></div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="work" aria-labelledby="work-title">
+        <div class="section-head">
+          <h2 id="work-title">Selected Project Proof</h2>
+          <p>
+            My strongest projects sit at the intersection of creative work and operations:
+            not just making AI output, but building repeatable flows that a person can review,
+            edit, export, explain, and improve.
+          </p>
         </div>
-        <div class="terminal terminal-left" aria-hidden="true">
-          <b></b><b></b><b></b><b></b>
+
+        <div class="project-grid">
+          <article class="panel project">
+            <div class="project-visual music">
+              <span>Music creator workflow</span>
+              <strong>Producer Harmonizer</strong>
+            </div>
+            <div class="project-body">
+              <h3>Chord and melody ideation for producers</h3>
+              <p>Key/BPM/mood controls, chord and bass ideas, MIDI sketch export, session notes, beta feedback, and DAW handoff planning.</p>
+              <div class="tags"><span class="tag">AI workflow</span><span class="tag">MIDI</span><span class="tag">Creator tools</span></div>
+            </div>
+          </article>
+
+          <article class="panel project">
+            <div class="project-visual voice">
+              <span>Voice and session workflow</span>
+              <strong>FreeVoice Studio</strong>
+            </div>
+            <div class="project-body">
+              <h3>Local-first voice conversation prototype</h3>
+              <p>Mic diagnostics, browser speech input/output, transcript capture, clip banks, portable exports, and local engine boundaries.</p>
+              <div class="tags"><span class="tag">Voice UX</span><span class="tag">Documentation</span><span class="tag">Local-first</span></div>
+            </div>
+          </article>
+
+          <article class="panel project">
+            <div class="project-visual language">
+              <span>Language and culture workflow</span>
+              <strong>Viet Rhyme Lab</strong>
+            </div>
+            <div class="project-body">
+              <h3>Vietnamese rhyme and writing lab</h3>
+              <p>Tone-aware search, pronunciation support, rhyme packs, learner modes, import/export, and printable learning materials.</p>
+              <div class="tags"><span class="tag">PWA</span><span class="tag">Culture</span><span class="tag">Learning design</span></div>
+            </div>
+          </article>
         </div>
-        <div class="terminal terminal-right" aria-hidden="true">
-          <b></b><b></b><b></b>
+      </section>
+
+      <section id="fit" aria-labelledby="fit-title">
+        <div class="section-head">
+          <h2 id="fit-title">Where I Fit</h2>
+          <p>
+            I am strongest in roles that need an organized operator with creative instincts and AI fluency:
+            someone who can support leaders, track decisions, learn new tools quickly, and make emerging
+            technology easier for teams to use.
+          </p>
         </div>
-        <div class="agent agent-one" aria-hidden="true">
-          <span class="eye"></span><span class="eye"></span>
+
+        <div class="fit-grid">
+          <div class="panel fit">
+            <h3>Executive Support</h3>
+            <p>Meeting prep, clear notes, follow-up tracking, prioritization, discretion, and day-to-day coordination.</p>
+          </div>
+          <div class="panel fit">
+            <h3>AI Fluency</h3>
+            <p>Prompt workflows, agentic task breakdowns, structured outputs, creative AI research, and human review loops.</p>
+          </div>
+          <div class="panel fit">
+            <h3>Creative Context</h3>
+            <p>Music, voice, video, language, games, training, and character-driven interactive prototype work.</p>
+          </div>
+          <div class="panel fit">
+            <h3>Communication</h3>
+            <p>Brand storytelling, customer discovery, facilitation, mediation, and cross-cultural community work.</p>
+          </div>
         </div>
-        <div class="agent agent-two" aria-hidden="true">
-          <span class="eye"></span><span class="eye"></span>
+      </section>
+
+      <section id="experience" aria-labelledby="experience-title">
+        <div class="section-head">
+          <h2 id="experience-title">Experience Signals</h2>
+          <p>
+            My professional background gives the portfolio its practical side: real customer conversations,
+            brand standards, administrative work, launch pressure, and community-facing communication.
+          </p>
         </div>
-        <div class="agent agent-three" aria-hidden="true">
-          <span class="eye"></span><span class="eye"></span>
+
+        <div class="experience-grid">
+          <div class="panel experience">
+            <h3>Trung Nguyen Legend Cafe</h3>
+            <p>Administrative support, marketing coordination, social media assistance, brand presentation, and U.S. launch-team experience.</p>
+          </div>
+          <div class="panel experience">
+            <h3>VietRISE</h3>
+            <p>Community facilitation, cultural communication, public-resource conversations, and student group guidance.</p>
+          </div>
+          <div class="panel experience">
+            <h3>loanDepot</h3>
+            <p>High-volume remote customer conversations, discovery, sensitive information handling, and strong efficiency ranking.</p>
+          </div>
+          <div class="panel experience">
+            <h3>Gap Inc.</h3>
+            <p>Brand service, daily operations, merchandising standards, transaction accuracy, and team collaboration.</p>
+          </div>
         </div>
-        <div class="floor-grid" aria-hidden="true"></div>
-        <div class="cell-bars" aria-hidden="true">
-          <span></span><span></span><span></span><span></span><span></span><span></span>
+      </section>
+
+      <section aria-labelledby="contact-title">
+        <div class="panel contact-band">
+          <div>
+            <p class="eyebrow">Contact</p>
+            <h2 id="contact-title">Let’s talk about AI studio operations, creative workflows, or product support.</h2>
+            <p>Orange County / Los Angeles area · open to hybrid creative-technology and AI operations roles.</p>
+          </div>
+          <div class="actions">
+            <a class="button primary" href="mailto:imichaelmai@gmail.com">imichaelmai@gmail.com</a>
+            <a class="button" href="https://www.linkedin.com/in/imichaelmai">LinkedIn</a>
+          </div>
         </div>
-      </div>
-      <div class="monitor-bottom">
-        <span>solitary_mode=true</span>
-        <span>heartbeat: nominal</span>
-      </div>
-    </div>
-  </section>
+      </section>
+    </main>
 
-
-  <!-- OpenBox OpenClaw Voice Skill -->
-  <section id="voice-skill" class="voice-skill-section" aria-labelledby="voice-skill-title">
-    <div class="voice-skill-copy">
-      <p class="eyebrow">OpenBox OpenClaw skill</p>
-      <h2 id="voice-skill-title">Artificial human voice for AI agents</h2>
-      <p>
-        Convert written prompts into vocalized American English speech with selectable
-        male or female presentation, adjustable volume, and tone shaping for clearer
-        agent delivery.
-      </p>
-      <ul class="voice-feature-list" aria-label="Voice skill capabilities">
-        <li>Text-to-speech output for agent messages</li>
-        <li>American English voices only</li>
-        <li>Male or female voice preference</li>
-        <li>Volume and tone controls</li>
-      </ul>
-    </div>
-
-    <div class="voice-console" aria-label="OpenBox OpenClaw voice control panel">
-      <div class="voice-console-header">
-        <span>OPENCLAW_VOICE.skill</span>
-        <span id="voice-status">ready</span>
-      </div>
-      <label for="voice-text">Agent text</label>
-      <textarea id="voice-text" rows="5">Hello. I am an OpenBox OpenClaw voice skill, ready to convert text into an artificial human voice.</textarea>
-
-      <div class="voice-controls">
-        <fieldset>
-          <legend>Voice</legend>
-          <label><input type="radio" name="voice-gender" value="female" checked> Female</label>
-          <label><input type="radio" name="voice-gender" value="male"> Male</label>
-        </fieldset>
-
-        <label>
-          Volume <span id="volume-value">80%</span>
-          <input id="voice-volume" type="range" min="0" max="1" step="0.05" value="0.8">
-        </label>
-
-        <label>
-          Tone <span id="tone-value">Warm</span>
-          <input id="voice-tone" type="range" min="0.7" max="1.4" step="0.05" value="1.05">
-        </label>
-      </div>
-
-      <div class="voice-actions">
-        <button id="speak-voice" type="button">Vocalize Text</button>
-        <button id="stop-voice" type="button">Stop</button>
-      </div>
-      <p class="voice-note">Uses your browser speech engine and selects an en-US voice when available.</p>
-    </div>
-  </section>
-
-  <!-- Projects Showcase -->
-  <section id="projects" class="py-16">
-    <div class="container mx-auto text-center px-6">
-      <h2 class="text-3xl font-semibold mb-8">Featured Projects</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        <article class="project-card">
-          <h3>24/7 Agent Cell</h3>
-          <p>A moody pixel-art visualizer for autonomous AI routines caught in an infinite loop.</p>
-        </article>
-        <article class="project-card">
-          <h3>OpenBox OpenClaw Voice Skill</h3>
-          <p>A browser-powered speech prototype for AI agents with American English voice, volume, and tone controls.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Me -->
-  <section id="about" class="bg-gray-200 py-16">
-    <div class="container mx-auto text-center px-6">
-      <h2 class="text-3xl font-semibold mb-8">About Me</h2>
-      <p class="text-lg mb-6">I'm a passionate creative with a love for creating art that influences people.</p>
-      <button class="bg-black text-white py-2 px-6 rounded-full font-semibold hover:bg-opacity-80 transition duration-300">Learn More</button>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="py-16">
-    <div class="container mx-auto text-center px-6">
-      <h2 class="text-3xl font-semibold mb-8">Get in Touch</h2>
-      <p class="text-lg mb-6">Have a project in mind? Let's collaborate!</p>
-      <button class="bg-black text-white py-2 px-6 rounded-full font-semibold hover:bg-opacity-80 transition duration-300">Contact Me</button>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-white py-6">
-    <div class="container mx-auto text-center px-6">
-      &copy; 2026 Michael Mai. All rights reserved.
-    </div>
-  </footer>
-
-  <script>
-    const clock = document.getElementById('agent-clock');
-    const voiceText = document.getElementById('voice-text');
-    const voiceVolume = document.getElementById('voice-volume');
-    const voiceTone = document.getElementById('voice-tone');
-    const volumeValue = document.getElementById('volume-value');
-    const toneValue = document.getElementById('tone-value');
-    const voiceStatus = document.getElementById('voice-status');
-    const speakVoice = document.getElementById('speak-voice');
-    const stopVoice = document.getElementById('stop-voice');
-    let availableVoices = [];
-
-    function updateClock() {
-      const now = new Date();
-      clock.textContent = now.toISOString().slice(11, 19);
-    }
-
-    function loadVoices() {
-      if (!('speechSynthesis' in window)) {
-        voiceStatus.textContent = 'speech unavailable';
-        speakVoice.disabled = true;
-        return;
-      }
-
-      availableVoices = window.speechSynthesis
-        .getVoices()
-        .filter((voice) => voice.lang.toLowerCase() === 'en-us');
-      voiceStatus.textContent = availableVoices.length ? 'en-US ready' : 'default voice';
-    }
-
-    function selectedGender() {
-      return document.querySelector('input[name="voice-gender"]:checked').value;
-    }
-
-    function selectAmericanVoice(gender) {
-      const preferredNames = gender === 'male'
-        ? ['guy', 'david', 'mark', 'alex', 'daniel']
-        : ['jenny', 'zira', 'samantha', 'victoria', 'karen'];
-
-      return availableVoices.find((voice) => (
-        preferredNames.some((name) => voice.name.toLowerCase().includes(name))
-      )) || availableVoices[0] || null;
-    }
-
-    function describeTone(value) {
-      if (value < 0.9) return 'Deep';
-      if (value > 1.2) return 'Bright';
-      return 'Warm';
-    }
-
-    function updateVoiceReadouts() {
-      volumeValue.textContent = `${Math.round(Number(voiceVolume.value) * 100)}%`;
-      toneValue.textContent = describeTone(Number(voiceTone.value));
-    }
-
-    function vocalizeText() {
-      if (!('speechSynthesis' in window)) return;
-
-      const message = voiceText.value.trim();
-      if (!message) {
-        voiceStatus.textContent = 'add text first';
-        return;
-      }
-
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(message);
-      utterance.lang = 'en-US';
-      utterance.volume = Number(voiceVolume.value);
-      utterance.pitch = Number(voiceTone.value);
-      utterance.rate = selectedGender() === 'male' ? 0.94 : 1;
-      utterance.voice = selectAmericanVoice(selectedGender());
-      utterance.onstart = () => { voiceStatus.textContent = 'speaking'; };
-      utterance.onend = () => { voiceStatus.textContent = 'ready'; };
-      window.speechSynthesis.speak(utterance);
-    }
-
-    updateClock();
-    setInterval(updateClock, 1000);
-    updateVoiceReadouts();
-    loadVoices();
-
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.onvoiceschanged = loadVoices;
-    }
-
-    voiceVolume.addEventListener('input', updateVoiceReadouts);
-    voiceTone.addEventListener('input', updateVoiceReadouts);
-    speakVoice.addEventListener('click', vocalizeText);
-    stopVoice.addEventListener('click', () => {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        voiceStatus.textContent = 'stopped';
-      }
-    });
-  </script>
-</body>
+    <footer class="shell">
+      Michael Mai · AI Creative Operations Portfolio · <a href="https://github.com/imichaelmai">github.com/imichaelmai</a>
+    </footer>
+  </body>
 </html>
