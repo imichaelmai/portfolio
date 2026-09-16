@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-label="Stylized Saigon Plaza Unreal Engine FPS smoke-test screenshot">
+  <rect width="1280" height="720" fill="#10161f"/>
+  <rect x="0" y="0" width="1280" height="70" fill="#06090d"/>
+  <rect x="70" y="120" width="610" height="380" fill="#d7c3bd"/>
+  <path d="M70 500h610v120H70z" fill="#202832"/>
+  <path d="M70 395h560v105H70z" fill="#a75a46"/>
+  <path d="M0 590h740L680 720H0z" fill="#1d2933"/>
+  <path d="M93 504h248L135 720H0z" fill="#d7d0c8" opacity=".9"/>
+  <rect x="720" y="120" width="470" height="440" rx="8" fill="#171b22"/>
+  <rect x="750" y="160" width="410" height="210" rx="6" fill="#232832"/>
+  <rect x="770" y="395" width="370" height="115" rx="4" fill="#0b0e12"/>
+  <g fill="#2c91ff"><rect x="785" y="180" width="38" height="28" rx="4"/><rect x="840" y="180" width="38" height="28" rx="4"/></g>
+  <g fill="#8794a3"><rect x="790" y="410" width="220" height="8"/><rect x="790" y="432" width="300" height="8"/><rect x="790" y="454" width="170" height="8"/><rect x="790" y="476" width="260" height="8"/></g>
+  <rect x="118" y="442" width="270" height="74" rx="35" fill="#ff8d41" opacity=".95"/>
+  <rect x="145" y="405" width="130" height="75" fill="#ffd27d" opacity=".88"/>
+  <text x="58" y="58" font-family="Inter,Arial,sans-serif" font-size="28" font-weight="800" fill="#f7f4ed">SAIGON PLAZA UE5 PLAYTEST</text>
+  <text x="920" y="650" font-family="Inter,Arial,sans-serif" font-size="34" font-weight="900" fill="#f7f4ed">FPS PROOF</text>
+</svg>

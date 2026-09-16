@@ -19,6 +19,7 @@
         --teal: #23756a;
         --gold: #b8832f;
         --blue: #2d5873;
+        --green: #315f3f;
         color: var(--ink);
         background: var(--paper);
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -32,8 +33,9 @@
       body {
         margin: 0;
         background:
-          radial-gradient(circle at 20% 0%, rgb(184 131 47 / 13%), transparent 26rem),
+          linear-gradient(90deg, rgb(139 37 50 / 6%) 0 1px, transparent 1px 100%),
           linear-gradient(180deg, #f7f4ed 0%, #eef3f2 58%, #f8f7f2 100%);
+        background-size: 100% 100%, auto;
       }
 
       a {
@@ -99,6 +101,12 @@
         color: #fffdf8;
       }
 
+      .button.strong {
+        border-color: var(--red);
+        background: var(--red);
+        color: #fffdf8;
+      }
+
       main {
         padding-bottom: 54px;
       }
@@ -110,6 +118,10 @@
         gap: 34px;
         align-items: center;
         padding: 56px 0 40px;
+      }
+
+      .hero-title-accent {
+        color: var(--red);
       }
 
       .eyebrow {
@@ -162,6 +174,31 @@
       .signal-board {
         display: grid;
         gap: 12px;
+      }
+
+      .poster {
+        overflow: hidden;
+        background: #10161f;
+      }
+
+      .poster img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+      }
+
+      .poster-caption {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 11px 14px;
+        background: #10161f;
+        color: #fffdf8;
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
       }
 
       .panel {
@@ -252,6 +289,46 @@
         border-top: 1px solid var(--line);
       }
 
+      .proof-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin: -22px 0 32px;
+      }
+
+      .proof-tile {
+        min-height: 126px;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        color: #fffdf8;
+        background: #17202a;
+      }
+
+      .proof-tile:nth-child(2) {
+        background: var(--red);
+      }
+
+      .proof-tile:nth-child(3) {
+        background: var(--teal);
+      }
+
+      .proof-tile span {
+        font-size: 0.76rem;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0.78;
+      }
+
+      .proof-tile strong {
+        display: block;
+        max-width: 18ch;
+        font-size: clamp(1.15rem, 2vw, 1.55rem);
+        line-height: 1;
+      }
+
       .section-head {
         display: grid;
         grid-template-columns: minmax(0, 0.8fr) minmax(280px, 1.2fr);
@@ -271,6 +348,69 @@
         gap: 14px;
       }
 
+      .feature-case {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+        gap: 18px;
+        align-items: stretch;
+        margin-bottom: 16px;
+        border-color: rgb(139 37 50 / 32%);
+        background: linear-gradient(135deg, #fffdf8 0%, #f5eee3 100%);
+      }
+
+      .feature-media {
+        overflow: hidden;
+        min-height: 360px;
+        background: #10161f;
+      }
+
+      .feature-media img,
+      .project-visual img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+      }
+
+      .feature-copy {
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 18px;
+      }
+
+      .feature-copy h3 {
+        font-size: clamp(1.55rem, 2.6vw, 2.35rem);
+        line-height: 1;
+      }
+
+      .feature-copy p {
+        color: var(--muted);
+      }
+
+      .case-points {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .case-point {
+        border-left: 3px solid var(--teal);
+        padding-left: 10px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .case-point:nth-child(even) {
+        border-left-color: var(--red);
+      }
+
+      .case-point strong {
+        display: block;
+        color: var(--ink);
+      }
+
       .project {
         overflow: hidden;
       }
@@ -282,6 +422,12 @@
         gap: 8px;
         padding: 16px;
         color: #fffdf8;
+      }
+
+      .project-visual.has-image {
+        min-height: 176px;
+        padding: 0;
+        background: #10161f;
       }
 
       .music {
@@ -300,6 +446,12 @@
         background:
           linear-gradient(135deg, rgb(23 32 42 / 18%), rgb(23 32 42 / 82%)),
           repeating-linear-gradient(45deg, #b8832f 0 14px, #f7f4ed 14px 18px, #23756a 18px 32px);
+      }
+
+      .game {
+        background:
+          linear-gradient(135deg, rgb(23 32 42 / 12%), rgb(23 32 42 / 72%)),
+          linear-gradient(120deg, var(--green), var(--blue));
       }
 
       .project-visual strong {
@@ -367,7 +519,8 @@
         nav,
         .hero,
         .section-head,
-        .contact-band {
+        .contact-band,
+        .feature-case {
           display: grid;
           grid-template-columns: 1fr;
         }
@@ -389,8 +542,14 @@
         .project-grid,
         .fit-grid,
         .experience-grid,
-        .metric-grid {
+        .metric-grid,
+        .proof-strip,
+        .case-points {
           grid-template-columns: 1fr;
+        }
+
+        .feature-media {
+          min-height: 230px;
         }
       }
     </style>
@@ -412,28 +571,37 @@
     <main class="shell">
       <section class="hero" aria-labelledby="hero-title">
         <div>
-          <p class="eyebrow">AI creative operations · studio support · product prototypes</p>
-          <h1 id="hero-title">I help creative teams turn AI ideas into organized, testable workflows.</h1>
+          <p class="eyebrow">AI creative operations · Unreal / Blender pipeline · product prototypes</p>
+          <h1 id="hero-title">I turn messy creative ideas into <span class="hero-title-accent">organized, playable proof.</span></h1>
           <p class="hero-copy">
-            Communications and operations professional with hands-on AI-assisted prototypes across music,
-            voice, video, language learning, and interactive training. I bring the structure around new ideas:
-            notes, research, follow-through, user flows, documentation, and practical demos.
+            Communications and operations professional building AI-assisted game and creative technology
+            workflows. Current focus: turning real-world reference into Blender assets, Unreal Engine 5
+            environments, playable FPS systems, and clear case-study documentation.
           </p>
           <div class="actions">
             <a class="button primary" href="mailto:imichaelmai@gmail.com">Contact Michael</a>
+            <a class="button strong" href="saigon-plaza-website/">Saigon Plaza Showcase</a>
             <a class="button" href="https://www.linkedin.com/in/imichaelmai">LinkedIn</a>
             <a class="button" href="https://github.com/imichaelmai">GitHub</a>
           </div>
         </div>
 
         <aside class="signal-board" aria-label="Portfolio summary">
+          <div class="panel poster">
+            <img src="saigon-plaza-website/assets/images/showcase/fps-pie-smoke.svg" alt="Saigon Plaza Unreal Engine FPS smoke-test screenshot" />
+            <div class="poster-caption">
+              <span>Saigon Plaza</span>
+              <span>UE5 FPS proof</span>
+            </div>
+          </div>
+
           <div class="panel scorecard">
             <p class="eyebrow">Hiring Signal</p>
-            <h2>Best fit: AI studio operations, creative technology enablement, documentation, customer success, and executive support.</h2>
+            <h2>Best fit: AI studio operations, creative technology, game-production support, documentation, and workflow design.</h2>
             <div class="metric-grid">
-              <div class="metric"><strong>400</strong><span>selected from U.S. launch applicant pool</span></div>
-              <div class="metric"><strong>Top 3</strong><span>global sales location contribution</span></div>
-              <div class="metric"><strong>30-40</strong><span>students guided in community learning groups</span></div>
+              <div class="metric"><strong>UE5</strong><span>playable first-person project direction</span></div>
+              <div class="metric"><strong>12</strong><span>verified Saigon Plaza asset imports</span></div>
+              <div class="metric"><strong>3</strong><span>major portfolio showcases</span></div>
             </div>
           </div>
 
@@ -449,28 +617,72 @@
               </div>
               <div class="step">
                 <span>2</span>
-                <div><strong>Prototype the path</strong><p>Build a usable demo, prompt flow, export, or operating checklist.</p></div>
+                <div><strong>Prototype the path</strong><p>Build a usable demo, asset batch, export, or operating checklist.</p></div>
               </div>
               <div class="step">
                 <span>3</span>
-                <div><strong>Package the handoff</strong><p>Document decisions, next steps, risks, and what a teammate should test next.</p></div>
+                <div><strong>Package the proof</strong><p>Document decisions, next steps, risks, and what a teammate should test next.</p></div>
               </div>
             </div>
           </div>
         </aside>
       </section>
 
+      <div class="proof-strip" aria-label="Portfolio proof highlights">
+        <div class="panel proof-tile"><span>Flagship</span><strong>Photo reference to playable UE5 case study</strong></div>
+        <div class="panel proof-tile"><span>Pipeline</span><strong>Blender assets, import checks, visual QA</strong></div>
+        <div class="panel proof-tile"><span>Operating style</span><strong>Clear decisions, evidence, and handoff</strong></div>
+      </div>
+
       <section id="work" aria-labelledby="work-title">
         <div class="section-head">
-          <h2 id="work-title">Selected Project Proof</h2>
+          <h2 id="work-title">Three Project Showcases</h2>
           <p>
-            My strongest projects sit at the intersection of creative work and operations:
-            not just making AI output, but building repeatable flows that a person can review,
-            edit, export, explain, and improve.
+            The portfolio now leads with the most complete proof: a real-world reference
+            to Blender to Unreal Engine 5 pipeline. The supporting projects show the same
+            operating pattern in music and voice tools.
           </p>
         </div>
 
+        <article class="panel feature-case">
+          <div class="feature-media">
+            <img src="saigon-plaza-website/assets/images/showcase/fps-pie-smoke.svg" alt="Saigon Plaza Unreal Engine first-person smoke test" />
+          </div>
+          <div class="feature-copy">
+            <div>
+              <p class="eyebrow">Flagship case study</p>
+              <h3>Saigon Plaza: photo reference to Blender assets to UE5 FPS proof</h3>
+              <p>
+                A Little Saigon-inspired project that shows the full production loop:
+                gather real reference, rebuild assets in Blender, verify imports, and
+                move toward a playable first-person Unreal environment.
+              </p>
+            </div>
+            <div class="case-points">
+              <div class="case-point"><strong>Reference</strong> Photos and location notes become production targets.</div>
+              <div class="case-point"><strong>Assets</strong> Cafe props, urban props, and furniture reconstructed in Blender.</div>
+              <div class="case-point"><strong>Engine</strong> UE5 import path, collision, UVs, and smoke-test proof.</div>
+              <div class="case-point"><strong>Next</strong> Materials, placement, animation, and FPS interaction polish.</div>
+            </div>
+            <div class="actions">
+              <a class="button strong" href="saigon-plaza-website/">Open Case Study</a>
+              <a class="button" href="saigon-plaza-website/artifacts/visual-qa/report.json">View QA Report</a>
+            </div>
+          </div>
+        </article>
+
         <div class="project-grid">
+          <article class="panel project">
+            <div class="project-visual has-image game">
+              <img src="saigon-plaza-website/assets/images/showcase/cafe-furniture-preview.svg" alt="Cafe furniture Blender asset batch for Saigon Plaza" />
+            </div>
+            <div class="project-body">
+              <h3>Saigon Plaza asset pipeline</h3>
+              <p>Photo-inspired cafe furniture, urban props, import evidence, and a UE5 FPS target that makes the process visible.</p>
+              <div class="tags"><span class="tag">Unreal Engine 5</span><span class="tag">Blender</span><span class="tag">FPS</span></div>
+            </div>
+          </article>
+
           <article class="panel project">
             <div class="project-visual music">
               <span>Music creator workflow</span>
@@ -494,18 +706,6 @@
               <div class="tags"><span class="tag">Voice UX</span><span class="tag">Documentation</span><span class="tag">Local-first</span></div>
             </div>
           </article>
-
-          <article class="panel project">
-            <div class="project-visual language">
-              <span>Language and culture workflow</span>
-              <strong>Viet Rhyme Lab</strong>
-            </div>
-            <div class="project-body">
-              <h3>Vietnamese rhyme and writing lab</h3>
-              <p>Tone-aware search, pronunciation support, rhyme packs, learner modes, import/export, and printable learning materials.</p>
-              <div class="tags"><span class="tag">PWA</span><span class="tag">Culture</span><span class="tag">Learning design</span></div>
-            </div>
-          </article>
         </div>
       </section>
 
@@ -513,24 +713,24 @@
         <div class="section-head">
           <h2 id="fit-title">Where I Fit</h2>
           <p>
-            I am strongest in roles that need an organized operator with creative instincts and AI fluency:
-            someone who can support leaders, track decisions, learn new tools quickly, and make emerging
-            technology easier for teams to use.
+            I am strongest in roles that need an organized operator with creative instincts,
+            game-production curiosity, and AI fluency: someone who can track decisions,
+            learn new tools quickly, and make emerging technology easier for teams to use.
           </p>
         </div>
 
         <div class="fit-grid">
           <div class="panel fit">
-            <h3>Executive Support</h3>
-            <p>Meeting prep, clear notes, follow-up tracking, prioritization, discretion, and day-to-day coordination.</p>
+            <h3>Production Support</h3>
+            <p>Reference gathering, asset lists, test evidence, decision logs, follow-up tracking, and practical handoffs.</p>
           </div>
           <div class="panel fit">
             <h3>AI Fluency</h3>
             <p>Prompt workflows, agentic task breakdowns, structured outputs, creative AI research, and human review loops.</p>
           </div>
           <div class="panel fit">
-            <h3>Creative Context</h3>
-            <p>Music, voice, video, language, games, training, and character-driven interactive prototype work.</p>
+            <h3>Game / 3D Context</h3>
+            <p>Unreal, Blender, character direction, environment references, playable prototypes, and visual QA.</p>
           </div>
           <div class="panel fit">
             <h3>Communication</h3>
