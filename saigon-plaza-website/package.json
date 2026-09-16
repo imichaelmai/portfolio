@@ -1,0 +1,17 @@
+{
+  "name": "saigon-plaza-website",
+  "version": "1.0.0",
+  "description": "Static portfolio showcase for Saigon Plaza, an Unreal Engine 5 FPS/world-build project rooted in Little Saigon-inspired reference, Blender asset reconstruction, Unreal import verification, animation direction, and first-person interaction evidence.",
+  "scripts": {
+    "test": "npm run visual:qa",
+    "visual:qa": "node scripts/visual-qa.js",
+    "serve": "python3 -m http.server 8765 --directory ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "playwright": "1.55.1"
+  }
+}
